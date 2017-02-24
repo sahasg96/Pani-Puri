@@ -1,13 +1,14 @@
 #include <Servo.h>
 
-  Servo Prick; // creating servo object
-  int CD = 1;   // CD Motor control pin
+  Servo Prick;
+  int CD = 1;
   int prick = 9; // Servo Motor done.
   int Aloo = 7;  //DC motor with gear done.
- // int Pani = 4;   
+  //int Pani = 4;
   int ButtonPin = 5;
   int p = 0 , a = 0, h = 0;  //function counters.
   int button_count = 0;
+
   int valve1=2, valve2=3; // valve for paani
   
 void setup() {
@@ -27,7 +28,6 @@ void Hole()
   {
     Serial.print("H");
     Serial.println(h);
-    
     Prick.write(0);  //HIGH
     delay(100);
     Prick.write(90); //LOW
@@ -39,7 +39,6 @@ void Stuffing()
   {
     Serial.print("A");
     Serial.println(a);
-    
     digitalWrite(Aloo,HIGH);
     delay(4000);
     digitalWrite(Aloo,LOW);
@@ -48,8 +47,7 @@ void Stuffing()
 void Valve()
   {
      Serial.print("P");
-     Serial.println(p);
-    
+    Serial.println(p);
      //anticlockwise to open
      
      digitalWrite(valve1,HIGH);
@@ -82,7 +80,6 @@ void Rotate()
 void startup()
   {
     Serial.println("Startup");
-    
     Rotate();
     Hole();
     Rotate();
@@ -99,10 +96,16 @@ void startup()
     p=2;
     a=4;
     h=5;
+    //button_count++;
   }
 
 int buttonpress()
   {
+    /*if(Button.read()==1)
+      return true;
+     else
+      return false; */
+      
       int state=0;
       if(digitalRead(ButtonPin)==HIGH)
       {
@@ -121,9 +124,8 @@ void loop()
   {
     if(buttonpress())
       {
-        Serial.print("button_count=");
-        Serial.println(button_count);
-        
+            Serial.print("button_count=");
+            Serial.println(button_count);
         if(button_count == 1)
           {
             startup();
@@ -132,24 +134,24 @@ void loop()
         if(button_count<=6 && button_count >1)
           {
             if(p<=6)
-              {
-                Valve();
-                p++;
-              }
+            {
+              Valve();
+              p++;
+            }
 
             Rotate();
 
             if(a<=6)
-              {
-                Stuffing();
-                a++;
-              }
+            {
+              Stuffing();
+              a++;
+            }
 
             if(h<=6)
-              {
-                Hole();
-                h++;
-              }
+            {
+              Hole();
+              h++;
+            }
           }
 
         if(button_count == 6)
