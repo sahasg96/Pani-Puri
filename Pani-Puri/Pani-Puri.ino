@@ -5,7 +5,7 @@
   int prick = 9; // Servo Motor done.
   int Aloo = 7;  //DC motor with gear done.
   int Pani = 4;
-  int Button = 5;
+  int ButtonPin = 5;
   int p = 0 , a = 0, h = 0;  //function counters.
   int button_count = 0;
 
@@ -15,7 +15,7 @@ void setup() {
   Prick.attach(prick);
   pinMode(Aloo,OUTPUT);
   pinMode(Pani,OUTPUT);
-  pinMode(Button,INPUT);
+  pinMode(ButtonPin,INPUT);
 
 }
 
@@ -74,9 +74,17 @@ int buttonpress()
       return true;
      else
       return false; */
-
-      // after debouce it gives a true or false for whether the button was pressed. If true the button_count is incremented.
-
+      int state=0;
+      if(digitalRead(ButtonPin)==HIGH)
+      {
+        delay(10);
+        if(digitalRead(ButtonPin)==HIGH)
+        {
+           state=1;
+           button_count++;
+        }
+      }
+      return(state);
   }
 
 void loop()
