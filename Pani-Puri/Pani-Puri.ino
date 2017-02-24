@@ -79,7 +79,6 @@ boolean buttonpress()
 
   }
 
-
 void loop()
   {
     if(buttonpress())
