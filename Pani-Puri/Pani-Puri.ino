@@ -68,7 +68,7 @@ void startup()
     //button_count++;
   }
 
-boolean buttonpress()
+int buttonpress()
   {
     /*if(Button.read()==1)
       return true;
