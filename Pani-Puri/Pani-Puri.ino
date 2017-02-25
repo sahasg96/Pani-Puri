@@ -1,11 +1,11 @@
 #include <Servo.h>
 
   Servo Prick; // creating servo object
-  int CD = 1;   // CD Motor control pin
+  int CD = 8;   // CD Motor control pin
   int prick = 9; // Servo Motor done.
-  int Aloo = 7;  //DC motor with gear done.
+  int Aloo = 10;  //DC motor with gear done.
  // int Pani = 4;   
-  int ButtonPin = 5;
+  int ButtonPin = 4;
   int p = 0 , a = 0, h = 0;  //function counters.
   int button_count = 0;
   int valve1=2, valve2=3; // valve for paani
@@ -29,20 +29,21 @@ void Hole()
     Serial.println(h);
     
     Prick.write(0);  //HIGH
-    delay(100);
+    delay(1000);
     Prick.write(90); //LOW
-    delay(500);
+    delay(1000);
     Prick.write(0);
   }
 
 void Stuffing()
   {
-    Serial.print("A");
+    Serial.print("A-On");
     Serial.println(a);
     
     digitalWrite(Aloo,HIGH);
-    delay(4000);
+    delay(3000);
     digitalWrite(Aloo,LOW);
+    Serial.println("A-Off");
   }
 
 void Valve()
@@ -54,28 +55,29 @@ void Valve()
      
      digitalWrite(valve1,HIGH);
      digitalWrite(valve2,LOW);
-     delay(100); //********************CHANGE**********
+     delay(500); //********************CHANGE**********
 
      //stay
      digitalWrite(valve1,LOW);
      digitalWrite(valve2,LOW);
-     delay(100); //********************CHANGE**********
+     delay(500); //********************CHANGE**********
 
      //clockwise to close
      digitalWrite(valve1,LOW);
      digitalWrite(valve2,HIGH);
-     delay(100); //********************CHANGE**********
+     delay(500); //********************CHANGE**********
 
      //finish
      digitalWrite(valve1,LOW);
      digitalWrite(valve2,LOW);
+     delay(500);
   }
 
 void Rotate()
   {
     Serial.println("R");
     digitalWrite(CD,HIGH);
-    delay(1000);
+    delay(545);
     digitalWrite(CD,LOW);
   }
 
