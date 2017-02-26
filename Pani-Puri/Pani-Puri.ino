@@ -8,7 +8,7 @@
   int ButtonPin = 4;
   int p = 0 , a = 0, h = 0;  //function counters.
   int button_count = 0;
-  int valve1=2, valve2=3; // valve for paani
+  int valve1=12, valve2=13; // valve for paani
   
 void setup() {
   // put your setup code here, to run once:
@@ -46,31 +46,29 @@ void Stuffing()
     Serial.println("A-Off");
   }
 
-void Valve()
-  {
-     Serial.print("P");
-     Serial.println(p);
+   void Valve(){ 
+
+
+     Serial.print("P - ON");
+    Serial.println(p);
     
-     //anticlockwise to open
-     
+     //to close the valve
+      digitalWrite(valve1,LOW);
+     digitalWrite(valve2,HIGH);
+     delay(900);
+    
+      delay(10000);//delay for the amount of time it takes to fill a puri with paani
+
+     //to open the valve
      digitalWrite(valve1,HIGH);
      digitalWrite(valve2,LOW);
-     delay(500); //********************CHANGE**********
-
-     //stay
-     digitalWrite(valve1,LOW);
-     digitalWrite(valve2,LOW);
-     delay(500); //********************CHANGE**********
-
-     //clockwise to close
-     digitalWrite(valve1,LOW);
-     digitalWrite(valve2,HIGH);
-     delay(500); //********************CHANGE**********
-
+     delay(900);
+    
      //finish
      digitalWrite(valve1,LOW);
      digitalWrite(valve2,LOW);
-     delay(500);
+
+     Serial.println("P - OFF");
   }
 
 void Rotate()

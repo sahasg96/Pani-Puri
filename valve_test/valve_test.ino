@@ -1,56 +1,46 @@
-int valve1, valve2;
-int count;
+
+int valve1=12, valve2=13; // valve for paani
+int p = 0;
 
   void setup() {
   // put your setup code here, to run once:
-   valve1=13, valve2=12;
-   count=0;
+  pinMode(valve1,OUTPUT);
+  pinMode(valve2,OUTPUT);
+  Serial.begin(9600);
 
 }
 
+  void Valve(){ 
 
-  void stopV(){
-    digitalWrite(valve1,LOW);
-     digitalWrite(valve2,LOW);
-     delay(500); 
-    }
 
-    void releaseTheWater(){ 
-     
+     Serial.print("P - ON");
+    Serial.println(p);
+    
      //to close the valve
-     count=0;
-     while(count<7)
-    {
       digitalWrite(valve1,LOW);
      digitalWrite(valve2,HIGH);
-     delay(100);
-     count++;
      delay(900);
-    }
     
-    delay(1000);//delay for the amount of time it takes to fill a puri
+      delay(10000);//delay for the amount of time it takes to fill a puri with paani
 
-   //to open the valve
-   count=0;
-    while(count<7)
-    {
+     //to open the valve
      digitalWrite(valve1,HIGH);
      digitalWrite(valve2,LOW);
-     delay(100);
-     count++;
      delay(900);
-    }
     
      //finish
      digitalWrite(valve1,LOW);
      digitalWrite(valve2,LOW);
+
+     Serial.println("P - OFF");
   }
+
 
 
 void loop() {
   // put your main code here, to run repeatedly:
  
-   releaseTheWater();
+   Valve();
    
   }
 
