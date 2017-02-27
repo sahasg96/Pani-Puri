@@ -1,8 +1,5 @@
-#include <Servo.h>
-
-  Servo Prick; // creating servo object
   int CD = 8;   // CD Motor control pin
-  int prick = 9; // Servo Motor done.
+  int prick = 9; // PRICKING MECHANISM
   int Aloo = 10;  //DC motor with gear done.
  // int Pani = 4;   
   int ButtonPin = 4;
@@ -13,12 +10,13 @@
 void setup() {
   // put your setup code here, to run once:
   pinMode(CD, OUTPUT);
-  Prick.attach(prick);
   pinMode(Aloo,OUTPUT);
   pinMode(valve1,OUTPUT);
   pinMode(valve2,OUTPUT);
   //pinMode(Pani,OUTPUT);
   pinMode(ButtonPin,INPUT);
+  pinMode(prick,OUTPUT);
+  digitalWrite(prick,HIGH);
   Serial.begin(9600);
 
 }
@@ -27,48 +25,60 @@ void Hole()
   {
     Serial.print("H");
     Serial.println(h);
-    
-    Prick.write(0);  //HIGH
-    delay(1000);
-    Prick.write(90); //LOW
-    delay(1000);
-    Prick.write(0);
+
+    for(int i=1; i<=4; i++)
+    {
+      //free fall
+      digitalWrite(prick, LOW);
+      delay(1000);
+      
+      
+      //up up up motion
+      digitalWrite(prick, HIGH);
+      delay(1000);
+      
+    }    
   }
 
 void Stuffing()
   {
     Serial.print("A-On");
     Serial.println(a);
-    
+ 
     digitalWrite(Aloo,HIGH);
-    delay(3000);
+    delay(10000);
     digitalWrite(Aloo,LOW);
     Serial.println("A-Off");
   }
 
-   void Valve(){ 
-
-
-     Serial.print("P - ON");
-    Serial.println(p);
-    
-     //to close the valve
-      digitalWrite(valve1,LOW);
-     digitalWrite(valve2,HIGH);
-     delay(900);
-    
-      delay(10000);//delay for the amount of time it takes to fill a puri with paani
+   void Valve(){
 
      //to open the valve
-     digitalWrite(valve1,HIGH);
-     digitalWrite(valve2,LOW);
-     delay(900);
-    
-     //finish
+     Serial.print("P-On");
+    Serial.println(p);
+     for(int i=1; i<=6; i++)
+     {
+       digitalWrite(valve1,LOW);
+       digitalWrite(valve2,HIGH);
+       delay(211);
+     }
+     digitalWrite(valve1,LOW);
+     digitalWrite(valve2,LOW);    
+     delay(15000);       //******************************CHANGE*******************************
+
+     //to close the valve
+     
+     for(int i=1;i<=6;i++)
+     {
+       digitalWrite(valve1,HIGH);
+       digitalWrite(valve2,LOW);
+       delay(211);
+     }
      digitalWrite(valve1,LOW);
      digitalWrite(valve2,LOW);
 
-     Serial.println("P - OFF");
+     Serial.println("P-Off");
+
   }
 
 void Rotate()
