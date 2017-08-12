@@ -1,5 +1,5 @@
-  int CD = 8;   // CD Motor control pin
-  int prick = 9; // PRICKING MECHANISM
+  int CD = 9;   // CD Motor control pin
+  int prick = 8; // PRICKING MECHANISM
   int Aloo = 10;  //DC motor with gear done.
  // int Pani = 4;   
   int ButtonPin = 4;
